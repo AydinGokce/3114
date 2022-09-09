@@ -1,0 +1,107 @@
+[ 0]  Processing script file: Script03.txt
+[ 0]
+[ 0]  Cmd 1 :  index	VA_Monterey.txt
+[ 0]  -----------------------------------------------------
+[ 0]  Cmd 2 :  show	hash
+[ 5]  Number of elements: 63
+[ 5]  Number of slots: 256
+[ 5]  Maximum elements in a slot: 2
+[ 5]  Load limit: 0.7
+[ 0]  
+[ 0]  Slot    Contents
+[ 8]      0:  [[Southall Chapel, [4975]]]
+[ 8]      6:  [[Trimble Knob, [7562]]]
+[ 8]      8:  [[Sounding Knob, [7309]]]
+[ 8]     14:  [[Seybert Chapel, [4696]]]
+[ 8]     16:  [[Hightown Church, [2754]]]
+[ 8]     24:  [[Bluegrass Valley, [515]]]
+[ 8]     29:  [[Meadow Draft, [3720]]]
+[ 8]     31:  [[Monterey Mountain, [4001]]]
+[ 8]     32:  [[Monterey Methodist Episcopal Church, [8369]]]
+[ 8]     36:  [[Claylick Hollow, [1201]]]
+[ 8]     37:  [[Hupman Valley, [2877]], [West Strait Creek, [5829]]]
+[ 8]     49:  [[Miracle Ridge, [3879]]]
+[ 8]     59:  [[Forks of Waters, [1822]], [Vance Hollow, [5669]]]
+[ 8]     62:  [[Strait Creek, [5102]]]
+[ 8]     64:  [[Elk Run, [1670]], [Blue Grass School (historical), [7942]]]
+[ 8]     66:  [[Highland Wildlife Management Area, [2612]]]
+[ 8]     67:  [[Lantz Mountain, [3314]]]
+[ 8]     81:  [[Thorny Bottom Church, [5419]]]
+[ 8]     83:  [[Davis Run, [1513]]]
+[ 8]     84:  [[Hamilton Chapel, [2346]]]
+[ 8]     87:  [[Union Chapel, [5548]]]
+[ 8]     90:  [[Bear Mountain, [6434]]]
+[ 8]    101:  [[Buck Hill, [675]]]
+[ 8]    104:  [[Asbury Church, [265]]]
+[ 8]    114:  [[Wooden Run, [6142]]]
+[ 8]    119:  [[Seybert Hills, [7188]]]
+[ 8]    120:  [[Hannah Field Airport, [6294]]]
+[ 8]    122:  [[Highland Elementary School, [8225]]]
+[ 8]    127:  [[Key Run, [3162]]]
+[ 8]    138:  [[New Salem Church, [4128]]]
+[ 8]    139:  [[Jack Mountain, [3037]]]
+[ 8]    146:  [[Simmons Run, [4819]]]
+[ 8]    152:  [[Monterey District, [8654]]]
+[ 8]    154:  [[Swope Hollow, [5259]]]
+[ 8]    155:  [[Possum Trot, [6940]], [Rich Hills, [7069]]]
+[ 8]    166:  [[Crab Run, [1361]]]
+[ 8]    174:  [[Doe Hill, [6693]]]
+[ 8]    179:  [[Laurel Run, [3438]]]
+[ 8]    184:  [[Barren Rock, [4409]]]
+[ 8]    191:  [[Ginseng Mountain, [2100]]]
+[ 8]    192:  [[Little Doe Hill, [3593]]]
+[ 8]    194:  [[Monterey, [7682]]]
+[ 8]    195:  [[Blue Grass, [387]]]
+[ 8]    198:  [[Frank Run, [1946]], [Trimble, [7435]]]
+[ 8]    204:  [[Mount Carlyle, [953]]]
+[ 8]    210:  [[Gulf Mountain, [2223]]]
+[ 8]    211:  [[Central Church, [1078]], [White Run, [5991]]]
+[ 8]    216:  [[Clover Creek, [6560]]]
+[ 8]    219:  [[Clover Creek Presbyterian Church, [8081]], [Town of Monterey, [8792]]]
+[ 8]    220:  [[Highland High School, [2473]]]
+[ 8]    231:  [[Burners Run, [797]]]
+[ 8]    233:  [[Peck Run, [4256]]]
+[ 8]    236:  [[New Hampden, [6811]]]
+[ 8]    243:  [[Strait Creek School (historical), [8513]]]
+[ 8]    251:  [[Seldom Seen Hollow, [4530]]]
+[ 8]    252:  [[Smith Field, [7818]]]
+[ 0]  -----------------------------------------------------
+[ 0]  Cmd 3 :  what_is	Forks of Waters
+[40]      1822:  Locale  (79d 30m 31s West, 38d 28m 56s North)
+[ 0]  -----------------------------------------------------
+[ 0]  Cmd 4 :  what_is	New Salem Church
+[40]      4128:  Church  (79d 31m 51s West, 38d 17m 25s North)
+[ 0]  -----------------------------------------------------
+[ 0]  Cmd 5 :  what_is	Hightown Church
+[40]      2754:  Church  (79d 37m 18s West, 38d 25m 26s North)
+[ 0]  -----------------------------------------------------
+[ 0]  Cmd 6 :  what_is	Doe Hill
+[40]      6693:  Summit  (79d 31m 13s West, 38d 23m 13s North)
+[ 0]  -----------------------------------------------------
+[ 0]  Cmd 7 :  what_is	Meadow Draft
+[40]      3720:  Valley  (79d 30m 24s West, 38d 15m 8s North)
+[ 0]  -----------------------------------------------------
+[ 0]  Cmd 8 :  what_is	Strait Creek
+[40]      5102:  Stream  (79d 30m 31s West, 38d 28m 56s North)
+[ 0]  -----------------------------------------------------
+[ 0]  Cmd 9 :  what_is	Seybert Hills
+[40]      7188:  Summit  (79d 32m 33s West, 38d 25m 52s North)
+[ 0]  -----------------------------------------------------
+[ 0]  Cmd 10 :  what_is	Monterey Mountain
+[40]      4001:  Summit  (79d 36m 22s West, 38d 25m 15s North)
+[ 0]  -----------------------------------------------------
+[ 0]  Cmd 11 :  what_is	Simmons Run
+[40]      4819:  Stream  (79d 32m 9s West, 38d 26m 54s North)
+[ 0]  -----------------------------------------------------
+[ 0]  Cmd 12 :  what_is	Gulf Mountain
+[40]      2223:  Summit  (79d 31m 3s West, 38d 29m 40s North)
+[ 0]  -----------------------------------------------------
+[ 0]  Cmd 13 :  what_is	Miracle Ridge
+[40]      3879:  Ridge  (79d 35m 0s West, 38d 25m 41s North)
+[ 0]  -----------------------------------------------------
+[ 0]  Cmd 14 :  what_is	xxxMiracle Ridgezzz
+[40]  No record matches xxxMiracle Ridgezzz
+[ 0]  -----------------------------------------------------
+[ 0]  Cmd 15 :  quit
+[ 0]  Found quit command... ending processing...
+[ 0]  -----------------------------------------------------

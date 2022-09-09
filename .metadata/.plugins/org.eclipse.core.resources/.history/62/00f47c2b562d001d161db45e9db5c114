@@ -1,0 +1,21 @@
+package main;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+
+public class Rectangle1 {
+
+	public static void main(String[] args) throws FileNotFoundException {
+		File file = new File(args[1]);
+		Scanner scanner = new Scanner(file);
+
+		while(scanner.hasNext()) {
+			
+		}
+		
+		scanner.close();
+	}
+
+}

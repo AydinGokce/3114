@@ -1,0 +1,24 @@
+import java.util.ArrayList;
+
+public class Vertex {
+	private int distance;
+	ArrayList<Edge> successors;
+	//list of edge objects to represent successors?
+	
+	Vertex() {
+		//-1 distance corresponds to INF
+		this.distance = -1;
+		successors = new ArrayList<Edge>();
+	}
+	
+	public int getDistance() {
+		return distance;
+	}
+	public void setDistance(int newDistance) {
+		distance = newDistance;
+	}
+	
+	public void addSuccessor(Edge edge) {
+		
+	}
+}

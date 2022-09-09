@@ -1,0 +1,287 @@
+
+import java.lang.reflect.Array;
+import java.util.Random;
+import student.TestableRandom;
+
+public class SkipList<K extends Comparable<K>, E> {
+
+    // ---------------- SKIPNODE CLASS ---------------- //
+    // COPIED FROM OPENDSA
+    private class SkipNode<K extends Comparable<K>, E> {
+        private KVPair<K, E> rec;
+        private SkipNode<K, E>[] forward;
+
+        public E element() {
+            return rec.value();
+        }
+
+
+        public K key() {
+            return rec.key();
+        }
+
+
+        public KVPair<K, E> record() {
+            return rec;
+        }
+
+
+        @SuppressWarnings("unchecked")
+        public SkipNode(KVPair<K, E> kvPair, int level) {
+            this.rec = kvPair;
+            forward = new SkipNode[level + 1];
+            for (int i = 0; i < level; i++)
+                forward[i] = null;
+        }
+
+
+        @SuppressWarnings("unchecked")
+        public SkipNode(K key, E value, int level) {
+            this.rec = new KVPair<K, E>(key, value);
+            forward = new SkipNode[level + 1];
+            for (int i = 0; i < level; i++)
+                forward[i] = null;
+        }
+
+
+        public String toString() {
+            if (this.rec == null) {
+                System.out.println("rec is null!");
+            }
+            return this.rec.toString();
+        }
+    }
+    // ------------------------------------------------ //
+
+    private SkipNode<K, E> head;
+    private Random rnd;
+    private int level;
+    private int size;
+
+    public SkipList() {
+        this.rnd = new TestableRandom();
+        this.head = new SkipNode<K, E>(null, 0);
+        this.level = -1;
+        this.size = 0;
+    }
+
+
+    /** Pick a level using a geometric distribution */
+    public int randomLevel() {
+        int lev;
+        for (lev = 0; rnd.nextBoolean(); lev++)
+            ; // advance level
+        return lev;
+    }
+
+
+    /** Insert a KVPair into the skiplist */
+    public boolean insert(KVPair<K, E> it) {
+        if (it == null) {
+            return false;
+        }
+        int newLevel = randomLevel();
+        Comparable<K> k = it.key();
+        if (level < newLevel)
+            adjustHead(newLevel);
+        @SuppressWarnings("unchecked") // Generic array allocation
+        SkipNode[] update = (SkipNode[])Array.newInstance(
+            SkipList.SkipNode.class, level + 1);
+        SkipNode<K, E> x = head; // Start at header node
+        for (int i = level; i >= 0; i--) { // Find insert position
+            while ((x.forward[i] != null) && (k.compareTo((K)(x.forward[i])
+                .key()) > 0))
+                x = x.forward[i];
+            update[i] = x; // Track end at level i
+        }
+        x = new SkipNode<K, E>(it, newLevel);
+        for (int i = 0; i <= newLevel; i++) { // Splice into list
+            x.forward[i] = update[i].forward[i]; // Who x points to
+            update[i].forward[i] = x; // Who y points to
+        }
+        size++; // Increment dictionary size
+        return true;
+
+    }
+
+
+    public KVPair<K, E> removeByKey(Comparable<K> key) {
+        SkipNode<K, E> x = head;
+        KVPair<K, E> item = null;
+        boolean found = false;
+        SkipNode[] update = (SkipNode[])Array.newInstance(
+            SkipList.SkipNode.class, level + 1);
+        for (int i = level; i >= 0; i--) {
+            x = head;
+            while ((x.forward[i] != null) && (key.compareTo((K)x.forward[i]
+                .key()) != 0)) {
+                x = x.forward[i];
+            }
+            update[i] = x;
+            if (x.forward[i] != null && (key.compareTo((K)x.forward[i]
+                .key()) == 0)) {
+                System.out.println("Found " + (K)x.forward[i].key()
+                    + " at level " + i);
+                found = true;
+                item = x.forward[i].record();
+            }
+        }
+
+        if (!found) {
+            return item;
+        }
+
+        for (int i = 0; i <= level; i++) {
+            if (update[i].forward[i] != null) {
+                update[i].forward[i] = update[i].forward[i].forward[i];
+            }
+        }
+        size--;
+        return item;
+
+    }
+
+
+    // Return the (first) matching matching element if one exists, null
+    // otherwise
+    public KVPair<K, E>[] search(Comparable<K> key) {
+
+        KVPair[] arr = (KVPair[])new Object[this.size];
+        int arrIdx = 0;
+
+        SkipNode<K, E> x = head; // Dummy header node
+        for (int i = level; i >= 0; i--) {// For each level...
+            while ((x.forward[i] != null) && (key.compareTo((K)x.forward[i]
+                .key()) > 0)) {// go forward
+                x = x.forward[i]; // Go one last step
+            }
+            x = x.forward[0]; // Move to actual record, if it exists
+        }
+        if ((x != null) && (key.compareTo((K)x.key()) == 0)) {
+            arr[arrIdx] = x.record();
+            arrIdx++;
+        }
+        return arr;
+    }
+
+
+    public void dump() {
+        System.out.println("SkipList dump:");
+        SkipNode<K, E> x = head;
+        while (x != null) {
+            System.out.println("Node has depth " + x.forward.length
+                + ", Value (" + (x == head ? "null" : x.toString()) + ")");
+            x = x.forward[0];
+        }
+        System.out.println("SkipList size is: " + this.size);
+    }
+
+
+    public int size() {
+        return this.size;
+    }
+
+
+    // COPIED FROM OPENDSA
+    private void adjustHead(int newLevel) {
+        SkipNode<K, E> temp = head;
+        head = new SkipNode<K, E>(null, newLevel);
+        for (int i = 0; i <= level; i++)
+            head.forward[i] = temp.forward[i];
+        level = newLevel;
+    }
+
+    // START: rectangle-specific functions --------
+
+
+    public KVPair<K, E> removeByCoordinates(E coordsUncasted) {
+        if (!(coordsUncasted instanceof Coordinates)) {
+            throw new IllegalArgumentException(
+                "Argument must be of type coordinates!");
+        }
+        KVPair<K, E> item = null;
+        Coordinates coords = (Coordinates)coordsUncasted;
+
+        SkipNode<K, E> x = head;
+        boolean found = false;
+        SkipNode[] update = (SkipNode[])Array.newInstance(
+            SkipList.SkipNode.class, level + 1);
+        for (int i = level; i >= 0; i--) {
+            while ((x.forward[i] != null) && !(coords.equals((E)x.forward[i]
+                .element()))) {
+                x = x.forward[i];
+            }
+            update[i] = x;
+            if (x.forward[i] != null) {
+                found = true;
+                item = x.forward[i].record();
+            }
+        }
+
+        if (!found) {
+            return item;
+        }
+
+        for (int i = 0; i < level; i++) {
+            if (update[i].forward[i] != null) {
+                update[i].forward[i] = update[i].forward[i].forward[i];
+            }
+        }
+        size--;
+        return item;
+
+    }
+
+
+    // returns list of intersecting pairs
+    public String intersection() {
+        SkipNode<K, E> a = head.forward[0];
+        SkipNode<K, E> b;
+
+        String results = "";
+
+        while (a != null) {
+            b = head.forward[0];
+
+            while (b != null) {
+
+                if (((Coordinates)a.element()).intersects((Coordinates)b
+                    .element()) && (a != b)) {
+                    results += "(" + a.toString() + " | " + b.toString()
+                        + ")\n";
+                }
+
+                b = b.forward[0];
+            }
+
+            a = a.forward[0];
+        }
+        return results;
+    }
+
+
+    // returns list of rectangles within specified region
+    public String regionSearch(E coordsUncasted) {
+        if (!(coordsUncasted instanceof Coordinates)) {
+            throw new IllegalArgumentException(
+                "Error: This method is specific to rectangles!");
+        }
+
+        Coordinates coords = (Coordinates)coordsUncasted;
+
+        String result = "";
+
+        SkipNode<K, E> x = head.forward[0];
+        while (x != null) {
+            if (coords.intersects((Coordinates)x.element())) {
+                result += "(" + x.record().toString() + ")";
+                if (x.forward[0] != null) {
+                    result += "\n";
+                }
+            }
+            x = x.forward[0];
+        }
+        return result;
+    }
+    // END: rectangle-specific functions --------
+}

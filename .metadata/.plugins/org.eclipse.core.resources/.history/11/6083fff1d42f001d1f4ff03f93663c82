@@ -1,0 +1,83 @@
+
+public class Coordinates {
+
+    private int x;
+    private int y;
+    private int w;
+    private int h;
+
+    private final int MAX_HEIGHT = 1024;
+    private final int MAX_WIDTH = 1024;
+    private final int MIN_X = 0;
+    private final int MIN_Y = 0;
+
+    public Coordinates(int x, int y, int w, int h) {
+
+        if (x + w > this.MAX_HEIGHT || y + h > this.MAX_HEIGHT) {
+            throw new IllegalArgumentException("Rectangle out of bounds!");
+        }
+        if (x < this.MIN_X || y < this.MIN_Y) {
+            throw new IllegalArgumentException(
+                "X or Y is below minimum valid value!");
+        }
+        if (w <= 0 || h <= 0) {
+            throw new IllegalArgumentException(
+                "W and H must be positive nonzero!");
+        }
+
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+    }
+
+
+    public Coordinates(int x, int y, int w, int h, String mode) {
+        if (mode.equals("regionSearch")) {
+            if (w <= 0 || h <= 0) {
+                throw new IllegalArgumentException(
+                    "W and H must be positive nonzero!");
+            }
+        }
+        else if(mode.equals("override")) {
+            
+        }
+        else {
+            throw new IllegalArgumentException("Invalid mode: " + mode);
+        }
+
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+    }
+
+
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (!(o.getClass().equals(this.getClass()))) {
+            return false;
+        }
+        Coordinates coordsified = (Coordinates)o;
+         return coordsified.x == this.x && coordsified.y == this.y
+            && coordsified.h == this.h && coordsified.w == this.w);
+    }
+
+
+    public boolean intersects(Coordinates c) {
+        if ((this.y >= c.y + c.h) || (this.y + this.h <= c.y)) {
+            return false;
+        }
+        if ((this.x >= c.x + c.w) || (this.x + this.w <= c.x)) {
+            return false;
+        }
+        return true;
+    }
+
+
+    public String toString() {
+        return this.x + ", " + this.y + ", " + this.w + ", " + this.h;
+    }
+}

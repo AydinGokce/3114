@@ -1,0 +1,15 @@
+package main;
+
+// int array is [x, y, w, h]
+public class Rectangle extends KVPair<String, int[]> {
+    
+    public Rectangle(String name, int[] dims) {
+        super(name, dims);
+    }
+    
+    public String toString() {
+        return "asfasnnndfasdfasfd";
+    }
+   
+    
+}

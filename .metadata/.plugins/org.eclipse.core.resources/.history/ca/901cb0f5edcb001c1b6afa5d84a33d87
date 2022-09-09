@@ -1,0 +1,8 @@
+
+public class Graph {
+	Vertex[] DijkstraTable;
+	
+	Graph(int numVertices) {
+		dijkstraTable = Vertex[numVertices];
+	}
+}

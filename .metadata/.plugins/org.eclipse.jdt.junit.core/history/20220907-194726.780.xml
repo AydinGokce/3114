@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestCoordinates" project="P1" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="TestCoordinates" time="0.006">
+    <testcase name="testEquals" classname="TestCoordinates" time="0.003"/>
+    <testcase name="testToString" classname="TestCoordinates" time="0.002"/>
+    <testcase name="testIntersects" classname="TestCoordinates" time="0.001"/>
+  </testsuite>
+</testrun>

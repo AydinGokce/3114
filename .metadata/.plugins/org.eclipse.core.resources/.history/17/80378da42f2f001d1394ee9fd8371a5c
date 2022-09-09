@@ -1,0 +1,95 @@
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Rectangle1 {
+
+    public static void main(String[] args) throws FileNotFoundException {
+
+        // instantiate file and scanner
+        File file = new File(args[0]);
+        Scanner scanner = new Scanner(file);
+
+        // instantiate skip list
+        SkipList<String, Coordinates> skipList = new SkipList();
+
+        // iterate over every line in the file
+        while (scanner.hasNext()) {
+
+            // parse the command and arguments to an array of strings
+            String nextLine = scanner.nextLine();
+            String[] command = parseCommand(nextLine);
+
+            if (command.length > 1) {
+
+                if (command[0].equals("insert")) {
+                    try {
+                        Rectangle rect = new Rectangle(command[1],
+                            new Coordinates(int_(command[2]), int_(command[3]),
+                                int_(command[4]), int_(command[5])));
+                        skipList.insert(rect);
+                        System.out.println("Rectangle inserted: (" + rect
+                            .toString() + ")");
+
+                    }
+                    catch (Exception e) {
+                        Rectangle rect = new Rectangle(command[1],
+                            new Coordinates(int_(command[2]), int_(command[3]),
+                                int_(command[4]), int_(command[5]),
+                                "override"));
+                        System.out.println("Rectangle rejected: (" + rect
+                            .toString() + ")");
+                    }
+
+                }
+                else if (command[0].equals("dump")) {
+
+                }
+                else if (command[0].equals("remove") && command.length == 2) {
+
+                }
+                else if (command[0].equals("remove") && command.length == 5) {
+
+                }
+                else if (command[0].equals("regionsearch")) {
+                    Coordinates coords;
+                    try {
+                        coords = new Coordinates(int_(command[1]), int_(command[2]), int_(command[3]), int_(command[4]));
+                    }
+                    catch (Exception e) {
+                        coords = new Coordinates(int_(command[1]), int_(command[2]), int_(command[3]), int_(command[4]), "override");
+                        continue;
+                    }
+                }
+                else if (command[0].equals("intersections")) {
+
+                }
+                else if (command[0].equals("search")) {
+
+                }
+                else {
+                    throw new IllegalArgumentException("Illegal command: "
+                        + command[0] + " (length " + command.length + ")");
+                }
+            }
+        }
+
+        scanner.close();
+    }
+
+
+    // given string, return array of commands
+    private static String[] parseCommand(String command) {
+
+        // trim and split against whitespaces
+        return command.trim().split("\\s+");
+    }
+
+
+    // to make the code neater
+    private static int int_(String s) {
+        return Integer.parseInt(s);
+    }
+
+}

@@ -1,0 +1,7 @@
+package main;
+
+public class SkipList<K extends Comparable<K>, E> {
+	private class SkipNode {
+		
+	}
+}

@@ -1,0 +1,21 @@
+
+public class Graph {
+	Vertex[] DijkstraTable;
+
+	Graph(int numVertices, int sourceIndex) {
+		this.DijkstraTable = new Vertex[numVertices];
+
+		// initialize table with empty vertex objects, representing disconnected
+		// vertices
+		for (int i = 0; i < this.DijkstraTable.length; i++) {
+			this.DijkstraTable[i] = new Vertex();
+		}
+
+	}
+
+	public void addEdge(int sourceIndex, int destIndex, int weight) {
+		Edge newEdge = new Edge();
+		this.DijkstraTable[sourceIndex].addSuccessor(null);
+	}
+
+}

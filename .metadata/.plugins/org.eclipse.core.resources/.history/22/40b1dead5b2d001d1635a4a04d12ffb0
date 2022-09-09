@@ -1,0 +1,70 @@
+package main;
+
+import java.lang.reflect.Array;
+import java.util.Random;
+import student.TestableRandom;
+
+public class SkipList<K extends Comparable<K>, E> {
+
+    // ---------------- SKIPNODE CLASS ---------------- //
+    // COPIED FROM OPENDSA
+    private class SkipNode<K extends Comparable<K>, E> {
+        private KVPair<K, E> rec;
+        private SkipNode<K, E>[] forward;
+
+        public E element() {
+            return rec.value();
+        }
+
+
+        public K key() {
+            return rec.key();
+        }
+
+
+        @SuppressWarnings("unchecked")
+        public SkipNode(KVPair<K, E> kvPair, int level) {
+            rec = kvPair;
+            forward = new SkipNode[level + 1];
+            for (int i = 0; i < level; i++)
+                forward[i] = null;
+        }
+
+
+        public String toString() {
+            return rec.toString();
+        }
+    }
+    // ------------------------------------------------ //
+    
+    
+    private SkipNode<K, E> head;
+    private Random rnd;
+    private int level;
+    private int size;
+
+    public SkipList() {
+        this.rnd = new TestableRandom();
+        this.head = new SkipNode<K, E>(null, 0);
+        this.level = -1;
+        this.size = 0;
+    }
+
+
+    /** Pick a level using a geometric distribution */
+	public int randomLevel() {
+	    int lev;
+	    for (lev = 0; rnd.nextBoolean(); lev++); // advance level
+	    return lev;
+	}
+
+	
+	// COPIED FROM OPENDSA
+	private void adjustHead(int newLevel) {
+	    SkipNode<K, E> temp = head;
+	    head = new SkipNode<K, E>(null, newLevel);
+	    for (int i = 0; i <= level; i++)
+	      head.forward[i] = temp.forward[i];
+	    level = newLevel;
+	  }
+}

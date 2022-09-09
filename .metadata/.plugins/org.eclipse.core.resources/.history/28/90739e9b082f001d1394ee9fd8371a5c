@@ -1,0 +1,78 @@
+
+
+import student.TestCase;
+
+public class TestSkipList extends TestCase {
+    
+    Rectangle rect;
+    SkipList<String, Coordinates> skipList;
+    
+    public void setUp() {
+       skipList = new SkipList<String, Coordinates>();
+    }
+    
+    
+    
+    public void testInsert() {
+        
+        for(int i = 0; i < 20; i++) {
+            assertTrue(skipList.insert(new Rectangle("elem", new Coordinates(0, 0, 1024, 1024))));
+        }
+        
+        assertFalse(skipList.insert(null));
+    }
+    
+    public void testSearch() {
+        rect = new Rectangle("elem", new Coordinates(0, 0, 1024, 1024));
+        skipList.insert(rect);
+        assertEquals(rect, skipList.search(rect.key()));
+        assertNull(skipList.search("not a real name"));
+        
+        Rectangle newRect = new Rectangle("elem", new Coordinates(0, 0, 1024, 1024));
+        assertNotSame(rect, newRect.key());
+    }
+    
+    public void testRemoveByKey() {
+        assertFalse(skipList.removeByKey("elem"));
+        rect = new Rectangle("elem", new Coordinates(0, 0, 1024, 1024));
+        skipList.insert(rect);
+        System.out.println("remove dump:");
+        skipList.dump();
+        
+        assertEquals(skipList.size(), 1);
+        assertFalse(skipList.removeByKey("not a real key"));
+        assertTrue(skipList.removeByKey(rect.key()));
+        assertEquals(skipList.size(), 0);
+    }
+    
+    public void testRemoveByCoordinates() {
+        rect = new Rectangle("elem", new Coordinates(0, 0, 1024, 1024));
+        Coordinates copyCoords = new Coordinates(0, 0, 1024, 1024);
+        Coordinates nonCopyCoords = new Coordinates(0, 1, 1024, 1023);
+        assertFalse(skipList.removeByCoordinates(copyCoords));
+        
+        skipList.insert(rect);
+        assertEquals(1, skipList.size());
+        assertFalse(skipList.removeByCoordinates(nonCopyCoords));
+        assertTrue(skipList.removeByCoordinates(copyCoords));
+        assertEquals(0, skipList.size());
+        
+    }
+    
+    public void testSize() {
+        
+        assertEquals(skipList.size(), 0);
+        
+        for(int i = 0; i < 20; i++) {
+            assertTrue(skipList.insert(new Rectangle("elem", new Coordinates(0, 0, 1024, 1024))));
+        }
+        
+        assertEquals(skipList.size(), 20);
+    }
+    
+    public void testDump() {
+        skipList.insert(new Rectangle("elem", new Coordinates(0, 0, 1024, 1024)));
+        System.out.println("size" + skipList.size());
+        skipList.dump();
+    }
+}

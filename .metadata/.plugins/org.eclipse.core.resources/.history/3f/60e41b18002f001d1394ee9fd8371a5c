@@ -1,0 +1,12 @@
+
+public class TestCoordinates {
+    
+    Coordinates c;
+    public void setUp() {
+        c = new Coordinates(0, 0, 512, 512);
+    }
+    
+    public void testEquals() {
+        
+    }
+}

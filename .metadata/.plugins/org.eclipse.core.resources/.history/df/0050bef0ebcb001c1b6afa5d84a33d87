@@ -1,0 +1,8 @@
+
+public class Vertex {
+	private int distance;
+	
+	Vertex() {
+		distance = 0;
+	}
+}

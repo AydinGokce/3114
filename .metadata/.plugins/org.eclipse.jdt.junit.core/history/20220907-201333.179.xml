@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestSkipList" project="P1" tests="7" started="7" failures="1" errors="0" ignored="0">
+  <testsuite name="TestSkipList" time="0.013">
+    <testcase name="testInsert" classname="TestSkipList" time="0.004"/>
+    <testcase name="testSearch" classname="TestSkipList" time="0.001"/>
+    <testcase name="testRemoveByKey" classname="TestSkipList" time="0.001"/>
+    <testcase name="testRemoveByCoordinates" classname="TestSkipList" time="0.001"/>
+    <testcase name="testSize" classname="TestSkipList" time="0.001"/>
+    <testcase name="testDump" classname="TestSkipList" time="0.001"/>
+    <testcase name="testIntersection" classname="TestSkipList" time="0.003">
+      <failure>junit.framework.AssertionFailedError: expected:&lt;2&gt; but was:&lt;3&gt;
+	at junit.framework.Assert.fail(Assert.java:57)
+	at junit.framework.Assert.failNotEquals(Assert.java:329)
+	at junit.framework.Assert.assertEquals(Assert.java:78)
+	at junit.framework.Assert.assertEquals(Assert.java:234)
+	at junit.framework.Assert.assertEquals(Assert.java:241)
+	at junit.framework.TestCase.assertEquals(TestCase.java:409)
+	at TestSkipList.testIntersection(TestSkipList.java:104)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at student.testingsupport.junit4.RunTestMethodWrapper.evaluate(RunTestMethodWrapper.java:74)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+</failure>
+    </testcase>
+  </testsuite>
+</testrun>

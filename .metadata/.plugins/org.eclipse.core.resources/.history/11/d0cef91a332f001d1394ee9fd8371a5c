@@ -1,0 +1,22 @@
+
+
+// int array is [x, y, w, h]
+public class Rectangle extends KVPair<String, Coordinates> {
+    
+    public Rectangle(String name, Coordinates dims) {
+        super(name, dims);
+    }    
+    
+    public boolean equals(Object o) {
+        if(o == null) {
+            return false;
+        }
+        else if(!(o instanceof Rectangle)) {
+            return false;
+        }
+        else {
+            return this.theKey == ((Rectangle)o).key() && this.theVal.equals(((Rectangle)o).theVal());
+        }
+    }
+        
+}

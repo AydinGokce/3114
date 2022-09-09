@@ -1,0 +1,39 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+public class SSAD {
+	
+	static Graph parseGraph(RandomAccessFile inputFile) throws IOException {
+		String currLine;
+		//TODO: implement while loop to skip linebreaks
+		
+		//parse number of vertices from line 1
+		currLine = inputFile.readLine();
+		int numVertices = Integer.parseInt(currLine.split(":")[1]);
+		
+		//parse start vertex from line 2
+		currLine = inputFile.readLine();
+		int startVertex = Integer.parseInt(currLine.split(":")[1]);
+		
+		//TODO: implement while loop to skip linebreaks
+		
+		
+		
+		return null;
+	}
+
+	public static void main(String[] args) throws IOException {
+		String inputFileName = args[0];
+		String outputFileName = args[1];
+		
+		RandomAccessFile inputFile = new RandomAccessFile(inputFileName, "rw");
+		RandomAccessFile outputFile = new RandomAccessFile(outputFileName, "rw");
+		
+		Graph graph = parseGraph(inputFile);
+		
+		inputFile.close();
+		outputFile.close();
+	}
+
+}

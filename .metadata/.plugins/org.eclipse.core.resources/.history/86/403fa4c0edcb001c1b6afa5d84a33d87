@@ -1,0 +1,4 @@
+
+public class MinHeap {
+	ArrayList<Vertex> heap = new ArrayList<Vertex>();
+}

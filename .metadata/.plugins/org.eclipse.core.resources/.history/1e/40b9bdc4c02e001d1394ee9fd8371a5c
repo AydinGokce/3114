@@ -1,0 +1,26 @@
+
+
+import student.TestCase;
+
+public class TestSkipList extends TestCase {
+    
+    SkipList skipList;
+    Rectangle rect;
+    
+    public void setUp() {
+       skipList = new SkipList();
+    }
+    
+    public void testInsert() {
+        rect = new Rectangle("elem", new int[]{0, 0, 1024, 1024});
+        assertTrue(skipList.insert(rect));
+
+        rect = new Rectangle("elem", new int[]{0, 0, 1025, 1024});
+        assertFalse(skipList.insert(rect));
+        
+        rect = new Rectangle("elem", new int[]{0, -1, 1024, 1024});
+        assertFalse(skipList.insert(rect));
+
+
+    }
+}

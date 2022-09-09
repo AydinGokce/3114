@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestSkipList" project="P1" tests="6" started="6" failures="1" errors="0" ignored="0">
+  <testsuite name="TestSkipList" time="0.011">
+    <testcase name="testInsert" classname="TestSkipList" time="0.004"/>
+    <testcase name="testSearch" classname="TestSkipList" time="0.001"/>
+    <testcase name="testRemoveByKey" classname="TestSkipList" time="0.003">
+      <failure>junit.framework.AssertionFailedError: expected: &lt;false&gt; but was: &lt;true&gt;
+	at junit.framework.Assert.fail(Assert.java:57)
+	at junit.framework.Assert.assertTrue(Assert.java:22)
+	at junit.framework.Assert.assertFalse(Assert.java:39)
+	at junit.framework.TestCase.assertFalse(TestCase.java:210)
+	at student.TestCase.assertFalse(TestCase.java:634)
+	at student.TestCase.assertFalse(TestCase.java:656)
+	at TestSkipList.testRemoveByKey(TestSkipList.java:58)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at student.testingsupport.junit4.RunTestMethodWrapper.evaluate(RunTestMethodWrapper.java:74)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+</failure>
+    </testcase>
+    <testcase name="testRemoveByCoordinates" classname="TestSkipList" time="0.001"/>
+    <testcase name="testSize" classname="TestSkipList" time="0.001"/>
+    <testcase name="testDump" classname="TestSkipList" time="0.001"/>
+  </testsuite>
+</testrun>

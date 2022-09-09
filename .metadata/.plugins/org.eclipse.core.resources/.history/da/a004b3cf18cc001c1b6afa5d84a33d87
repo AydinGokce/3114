@@ -1,0 +1,137 @@
+
+public class Graph {
+	private Vertex[] DijkstraTable;
+	private int sourceIndex;
+	private MinHeap heap;
+	private int unvisitedVertices;
+
+	Graph(int numVertices, int sourceIndex) {
+		this.DijkstraTable = new Vertex[numVertices];
+		this.heap = new MinHeap(numVertices);
+		// initialize table with empty vertex objects, representing disconnected
+		// vertices
+		for (int i = 0; i < this.DijkstraTable.length; i++) {
+			this.DijkstraTable[i] = new Vertex(i);
+		}
+		this.sourceIndex = sourceIndex;
+		this.DijkstraTable[this.sourceIndex].setDistance(0);
+		heap.add(this.DijkstraTable[this.sourceIndex]);
+		this.unvisitedVertices = numVertices - 1;
+
+	}
+
+	public void addEdge(int sourceIndex, int destIndex, int weight) {
+		Edge newEdge = new Edge(destIndex, weight);
+		this.DijkstraTable[sourceIndex].addSuccessor(newEdge);
+	}
+
+	// return true when all best paths are found
+	public void iterateSSAD() {
+
+		while (heap.size() > 0) {
+
+			Vertex highestPriority = this.heap.poll();
+
+			System.out.println("Current heap: " + heap.toString());
+			for (int i = 0; i < highestPriority.getSuccessors().size(); i++) {
+				Edge successor = highestPriority.getSuccessors().get(i);
+				Vertex successorVertex = this.DijkstraTable[successor.getSuccessor()];
+
+				int alt = highestPriority.getDistance() + successor.getWeight();
+				if (successorVertex.getDistance() == -1 || alt < successorVertex.getDistance()) {
+					successorVertex.setDistance(alt);
+				}
+
+				heap.add(successorVertex);
+				this.DijkstraTable[successor.getSuccessor()] = successorVertex;
+				//unvisitedVertices -= 1;
+			}
+		}
+	}
+
+	private String padAfter(int strlen, int padding, String padChar) {
+		String pad = "";
+
+		int remainingPadding = padding - strlen;
+
+		for (int i = 0; i < remainingPadding; i++) {
+			pad += padChar;
+		}
+		return pad;
+	}
+
+	private String padBefore(int strlen, int padding, String padChar) {
+		String pad = "";
+
+		int remainingPadding = padding - strlen;
+
+		for (int i = 0; i < remainingPadding; i++) {
+			pad += padChar;
+		}
+		return pad;
+	}
+
+	public String toString() {
+
+		int padding = 5;
+		String padChar = " ";
+
+		String finalString = "Node";
+		finalString += padAfter(finalString.length() - 1, padding, padChar);
+
+		finalString += "|";
+		finalString += " Successors\n";
+		finalString += "----------------------------------------------------------------------";
+
+		Vertex currVertex;
+
+		for (int i = 0; i < this.DijkstraTable.length; i++) {
+			currVertex = this.DijkstraTable[i];
+			finalString += "\n";
+			finalString += padBefore(Integer.toString(i).length(), padding, padChar);
+			finalString += Integer.toString(i);
+			finalString += " |";
+
+			Edge successor;
+
+			for (int j = 0; j < currVertex.getSuccessors().size(); j++) {
+				successor = currVertex.getSuccessors().get(j);
+
+				String successorID = Integer.toString(successor.getSuccessor());
+				String weight = Integer.toString(successor.getWeight());
+
+				finalString += padBefore(successorID.length(), padding, padChar);
+				finalString += successorID;
+				finalString += ": ";
+				finalString += padBefore(weight.length(), 2, padChar);
+				finalString += weight;
+
+			}
+		}
+
+		finalString += "\n\nStart vertex is: " + this.sourceIndex + "\n\n";
+
+		String dest = "Dest | ";
+
+		finalString += padBefore(0, dest.length(), padChar);
+		finalString += "Total";
+		finalString += "\n" + dest + "Weight | Path\n";
+		finalString += "----------------------------------------------------------------------";
+
+		for(int i = 0; i < this.DijkstraTable.length; i++) {
+			currVertex = this.DijkstraTable[i];
+			finalString += "\n";
+			finalString += padBefore(Integer.toString(i).length(), padding, padChar);
+			finalString += i;
+			finalString += " |";
+			finalString += padBefore(Integer.toString(currVertex.getDistance()).length(), padding, padChar);
+			finalString += currVertex.getDistance();
+			finalString += " |";
+			
+		}
+		
+		return finalString;
+
+	}
+
+}

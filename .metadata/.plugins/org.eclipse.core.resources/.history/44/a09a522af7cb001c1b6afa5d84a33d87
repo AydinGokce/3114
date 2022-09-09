@@ -1,0 +1,10 @@
+
+public class Graph {
+	Vertex[] DijkstraTable;
+	
+	Graph(int numVertices, int sourceIndex) {
+		this.DijkstraTable = new Vertex[numVertices];
+	}
+	
+	
+}

@@ -1,0 +1,12 @@
+
+public class Vertex {
+	private int distance;
+	
+	Vertex() {
+		
+	}
+	
+	public int getDistance() {
+		return distance;
+	}
+}

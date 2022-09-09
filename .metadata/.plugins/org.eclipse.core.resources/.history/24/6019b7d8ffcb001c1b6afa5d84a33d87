@@ -1,0 +1,11 @@
+import java.util.ArrayList;
+
+public class MinHeap {
+	private ArrayList<Vertex> heap;
+	
+	MinHeap() {
+		heap = new ArrayList<Vertex>();
+	}
+	
+	
+}

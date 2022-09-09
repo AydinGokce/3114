@@ -1,0 +1,72 @@
+
+public class Graph {
+	Vertex[] DijkstraTable;
+
+	Graph(int numVertices, int sourceIndex) {
+		this.DijkstraTable = new Vertex[numVertices];
+
+		// initialize table with empty vertex objects, representing disconnected
+		// vertices
+		for (int i = 0; i < this.DijkstraTable.length; i++) {
+			this.DijkstraTable[i] = new Vertex();
+		}
+
+	}
+
+	public void addEdge(int sourceIndex, int destIndex, int weight) {
+		Edge newEdge = new Edge(destIndex, weight);
+		this.DijkstraTable[sourceIndex].addSuccessor(newEdge);
+	}
+	
+	//return false when all best paths are found
+	public boolean iterateSSAD() {
+		return false;
+	}
+	
+	private String padAfter(int strlen, int padding, String padChar) {
+		String pad = "";
+		
+		int remainingPadding = padding - strlen;
+		
+		for(int i = 0; i < remainingPadding; i++) {
+			pad += padChar;
+		}
+		return pad;
+	}
+	
+	private String padBefore(int strlen, int padding, String padChar) {
+		String pad = "";
+		
+		int remainingPadding = padding - strlen;
+		
+		for(int i = 0; i < remainingPadding; i++) {
+			pad += padChar;
+		}
+		return pad;
+	}
+	
+	
+	public String toString() {
+		
+		
+		int padding = 6;
+		String padChar = " ";
+		
+		
+		String finalString = "Node";
+		finalString += padAfter(finalString.length(), padding, padChar);
+		
+		finalString += "|";
+		finalString += " Successors\n";
+		finalString += "----------------------------------------------------------------------";
+		
+		Vertex currVertex;
+		
+		for (int i = 0; i < this.DijkstraTable.length; i++) {
+			 currVertex = this.DijkstraTable[i];
+		}
+		return finalString;
+		
+	}
+
+}

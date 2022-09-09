@@ -1,0 +1,11 @@
+
+public class Edge {
+	
+	int weight;
+	Vertex successor; 
+	
+	Edge() {
+		
+	}
+	
+}

@@ -1,0 +1,23 @@
+import java.io.FileNotFoundException;
+import java.io.RandomAccessFile;
+
+public class SSAD {
+	
+	static Graph parseGraph(RandomAccessFile inputFile) {
+		
+		
+		
+		return null;
+	}
+
+	public static void main(String[] args) throws FileNotFoundException {
+		String inputFileName = args[0];
+		String outputFileName = args[1];
+		
+		RandomAccessFile inputFile = new RandomAccessFile(inputFileName, "rw");
+		RandomAccessFile outputFile = new RandomAccessFile(outputFileName, "rw");
+		
+		Graph graph = parseGraph(inputFile);
+	}
+
+}

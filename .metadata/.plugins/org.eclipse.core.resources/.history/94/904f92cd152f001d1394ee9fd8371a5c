@@ -1,0 +1,124 @@
+
+
+import student.TestCase;
+
+public class TestSkipList extends TestCase {
+    
+    Rectangle rect;
+    SkipList<String, Coordinates> skipList;
+    
+    public void setUp() {
+       skipList = new SkipList<String, Coordinates>();
+    }
+    
+    
+    
+    public void testInsert() {
+        
+        for(int i = 0; i < 20; i++) {
+            assertTrue(skipList.insert(new Rectangle("elem", new Coordinates(0, 0, 1024, 1024))));
+        }
+        
+        assertFalse(skipList.insert(null));
+    }
+    
+    public void testSearch() {
+        rect = new Rectangle("elem", new Coordinates(0, 0, 1024, 1024));
+        skipList.insert(rect);
+        assertEquals(rect, skipList.search(rect.key()));
+        assertNull(skipList.search("not a real name"));
+        
+        Rectangle newRect = new Rectangle("elem", new Coordinates(0, 0, 1024, 1024));
+        assertNotSame(rect, newRect.key());
+    }
+    
+    public void testRemoveByKey() {
+        assertFalse(skipList.removeByKey("elem"));
+        Rectangle rect1 = new Rectangle("elem1", new Coordinates(0, 0, 1024, 1024));
+        Rectangle rect2 = new Rectangle("elem2", new Coordinates(0, 0, 1024, 1024));
+        Rectangle rect3 = new Rectangle("elem3", new Coordinates(0, 0, 1024, 1024));
+        Rectangle rect4 = new Rectangle("elem4", new Coordinates(0, 0, 1024, 1024));
+        
+        
+        assertTrue(skipList.insert(rect1));
+        assertTrue(skipList.insert(rect2));
+        assertTrue(skipList.insert(rect3));
+        assertTrue(skipList.insert(rect4));
+        
+        skipList.dump();
+        
+        assertTrue(skipList.removeByKey("elem4"));
+
+        
+        assertEquals(skipList.size(), 4);
+        assertFalse(skipList.removeByKey("not a real key"));
+        
+    }
+    
+    public void testRemoveByCoordinates() {
+        rect = new Rectangle("elem", new Coordinates(0, 0, 1024, 1024));
+        Coordinates copyCoords = new Coordinates(0, 0, 1024, 1024);
+        Coordinates nonCopyCoords = new Coordinates(0, 1, 1024, 1023);
+        assertFalse(skipList.removeByCoordinates(copyCoords));
+        
+        skipList.insert(rect);
+        assertEquals(1, skipList.size());
+        assertFalse(skipList.removeByCoordinates(nonCopyCoords));
+        assertTrue(skipList.removeByCoordinates(copyCoords));
+        assertEquals(0, skipList.size());
+        
+        
+        
+    }
+    
+    public void testSize() {
+        
+        assertEquals(skipList.size(), 0);
+        
+        for(int i = 0; i < 20; i++) {
+            assertTrue(skipList.insert(new Rectangle("elem", new Coordinates(0, 0, 1024, 1024))));
+        }
+        
+        assertEquals(skipList.size(), 20);
+    }
+    
+    public void testDump() {
+        skipList.insert(new Rectangle("elem", new Coordinates(0, 0, 1024, 1024)));
+        skipList.dump();
+    }
+    
+    /*
+    public void tefstIntersection() {
+        
+        assertEquals("", skipList.intersection());
+        
+        Rectangle p1 = new Rectangle("p1", new Coordinates(512/2, 512/2, 512, 512));
+        
+        assertEquals("", skipList.intersection());
+        
+        Rectangle p2 = new Rectangle("p2", new Coordinates(0, 0, 128, 128));
+        
+        skipList.insert(p1);
+        skipList.insert(p2);
+        
+        assertEquals("", skipList.intersection());
+        
+        //assertTrue(skipList.removeByKey("p1"));
+        assertTrue(skipList.removeByKey("p2"));
+        
+        Rectangle p3 = new Rectangle("p3", new Coordinates(512/2, 512/2, 512, 512));
+        Rectangle p4 = new Rectangle("p4", new Coordinates(0, 0, 512, 512));
+        
+        assertTrue(skipList.insert(p3));
+        assertTrue(skipList.insert(p4));
+        assertTrue(skipList.removeByKey(rect.key()));
+        assertEquals(skipList.size(), 0);
+        skipList.dump();
+        //assertEquals(2, skipList.size());
+        assertTrue(p3.value().intersects(p4.value()));
+        assertTrue(p4.value().intersects(p3.value()));
+        assertEquals("(p3, 256, 256, 512, 512 | p4, 0, 0, 512, 512)\n(p4, 0, 0, 512, 512 | p3, 256, 256, 512, 512)\n", skipList.intersection());
+    
+    }
+    */
+}

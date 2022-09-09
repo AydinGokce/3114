@@ -1,0 +1,18 @@
+
+public class TestCoordinates extends student.TestCase {
+    
+    Coordinates c;
+    public void setUp() {
+        c = new Coordinates(0, 0, 512, 512);
+    }
+    
+    public void testEquals() {
+        assertFalse(c.equals(null));
+        assertFalse(c.equals("hi"));
+        assertFalse(c.equals(new Coordinates(0, 0, 512, 1)));
+        assertFalse(c.equals(new Coordinates(0, 0, 1, 512)));
+        assertFalse(c.equals(new Coordinates(0, 1, 512, 512)));
+        assertFalse(c.equals(new Coordinates(1, 0, 1, 512)));
+        assertTrue(c.equals(new Coordinates(0, 0, 512, 512)));
+    }
+}

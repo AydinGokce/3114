@@ -1,0 +1,98 @@
+package main;
+
+import java.lang.reflect.Array;
+import java.util.Random;
+import student.TestableRandom;
+
+public class SkipList<K extends Comparable<K>, E> {
+
+    private Random rnd;
+    private int level;
+    private int size;
+
+    // COPIED FROM OPENDSA
+    private class SkipNode<K extends Comparable<K>, E> {
+        private KVPair<K, E> rec;
+        private SkipNode<K, E>[] forward;
+
+        public E element() {
+            return rec.value();
+        }
+
+
+        public K key() {
+            return rec.key();
+        }
+
+
+        @SuppressWarnings("unchecked")
+        public SkipNode(KVPair<K, E> kvPair, int level) {
+            rec = kvPair;
+            forward = new SkipNode[level + 1];
+            for (int i = 0; i < level; i++)
+                forward[i] = null;
+        }
+
+
+        public String toString() {
+            return rec.toString();
+        }
+    }
+
+    public SkipList() {
+        rnd = new TestableRandom();
+
+    }
+
+
+    // COPIED FROM OPENDSA
+    /** Insert a KVPair into the skiplist */
+	public boolean insert(KVPair<K,E> it) {
+	    int newLevel = randomLevel();
+	    Comparable<K> k = it.key();
+	    if (level < newLevel)
+	        adjustHead(newLevel);
+	    @SuppressWarnings("unchecked") // Generic array allocation
+	    SkipNode[] update = (SkipNode[])Array.newInstance(SkipList.SkipNode.class, level+1);
+	    SkipNode x = head;        // Start at header node
+	    for (int i=level; i>=0; i--) { // Find insert position
+	        while((x.forward[i] != null) && (k.compareTo((x.forward[i]).element().key()) > 0))
+	            x = x.forward[i];
+	        update[i] = x;               // Track end at level i
+	    }
+	    x = new SkipNode(it, newLevel);
+
+	        x.forward[i] = update[i].forward[i]; // Who x points to
+	        update[i].forward[i] = x;            // Who y points to
+	    }size++; // Increment dictionary size
+    return true;
+
+    }
+
+    // COPIED FROM OPENDSA
+// Return the (first) matching matching element if one exists, null otherwise
+public KVPair<K,E> search(Comparable<K> key) {
+ boolean found = false;
+ SkipNode x = head;                     // Dummy header node
+ for (int i=level; i>=0; i--)           // For each level...
+     while ((x.forward[i] != null) &&
+                  (key.compareTo(x.forward[i].element().key()) > 0)) // go forward
+         x = x.forward[i];              // Go one last step
+ x = x.forward[0];  // Move to actual record, if it exists
+ if ((x != null) && (key.compareTo(x.element().key()) == 0))
+     return x.element();
+ else
+     return null;
+}for(
+
+    int i = 0;i<=newLevel;i++)
+    {      // Splice into list
+
+    /** Pick a level using a geometric distribution */
+	public int randomLevel() {
+	    int lev;
+	    for (lev = 0; rnd.nextBoolean(); lev++); // advance level
+	    return lev;
+	}
+
+}

@@ -1,0 +1,12 @@
+package main;
+
+import student.TestCase;
+
+public class TestSkipList {
+    
+    SkipList skipList = new SkipList();
+    
+    public void setUp() {
+        
+    }
+}

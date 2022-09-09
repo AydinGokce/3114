@@ -1,0 +1,27 @@
+
+public class Coordinates {
+    
+    private int x;
+    private int y;
+    private int w;
+    private int h;
+    
+    private final int MAX_HEIGHT = 1024;
+    private final int MAX_WIDTH = 1024;
+    private final int MIN_HEIGHT = 0;
+    private final int MIN_WIDTH = 0;
+    
+    
+    
+    
+    public Coordinates(int x, int y, int w, int h) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+    }
+    
+    public String toString() {
+        return this.x + " " + this.y + " " + this.w + " " + this.h;
+    }
+}

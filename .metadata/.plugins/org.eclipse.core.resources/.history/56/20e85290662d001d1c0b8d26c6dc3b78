@@ -1,0 +1,16 @@
+package main;
+
+import student.TestCase;
+
+public class TestSkipList {
+    
+    SkipList skipList;
+    
+    public void setUp() {
+       skipList = new SkipList();
+    }
+    
+    public void testInsert() {
+        
+    }
+}

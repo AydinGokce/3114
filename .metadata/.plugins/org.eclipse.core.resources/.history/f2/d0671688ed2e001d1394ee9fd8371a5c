@@ -1,0 +1,13 @@
+
+public class Coordinates {
+    
+    private int x;
+    private int y;
+    private int w;
+    private int h;
+    
+    
+    public Coordinates(int x, int y, int w, int h) {
+        
+    }
+}

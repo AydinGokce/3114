@@ -1,0 +1,20 @@
+
+public class Edge {
+	
+	int weight;
+	int successor; 
+	
+	Edge(int successor, int weight) {
+		this.successor = successor;
+		this.weight = weight;
+	}
+	
+	public int getWeight() {
+		return weight;
+	}
+	
+	public int getSuccessor() {
+		return successor;
+	}
+	
+}

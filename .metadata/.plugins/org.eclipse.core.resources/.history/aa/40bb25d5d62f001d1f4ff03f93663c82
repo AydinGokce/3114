@@ -1,0 +1,200 @@
+
+import java.lang.reflect.Array;
+import student.TestCase;
+
+public class SkipListTest extends TestCase {
+
+    private Rectangle rect;
+    private SkipList<String, Coordinates> skipList;
+
+    public void setUp() {
+        skipList = new SkipList<String, Coordinates>();
+    }
+
+
+    public void testInsert() {
+
+        for (int i = 0; i < 20; i++) {
+            assertTrue(skipList.insert(new Rectangle("elem", new Coordinates(0,
+                0, 1024, 1024))));
+        }
+
+        assertFalse(skipList.insert(null));
+    }
+
+
+    public void testSearch() {
+        rect = new Rectangle("elem1", new Coordinates(0, 0, 1024,
+            1024));
+        Rectangle rect1 = new Rectangle("elem1", new Coordinates(0, 0, 1024,
+            1024));
+        Rectangle rect2 = new Rectangle("elem1", new Coordinates(0, 0, 1024,
+            1024));
+        Rectangle rect3 = new Rectangle("elem1", new Coordinates(0, 0, 1024,
+            1024));
+        Rectangle rect4 = new Rectangle("elem2", new Coordinates(0, 0, 1024,
+            1024));
+        
+        assertTrue(skipList.insert(rect1));
+        assertTrue(skipList.insert(rect2));
+        assertTrue(skipList.insert(rect3));
+        assertTrue(skipList.insert(rect4));
+        
+        skipList.dump();
+        
+        KVPair[] arr = skipList.search("elem1");
+        
+        for(int i = 0; i < 3; i++) {
+            assertEquals(arr[i], rect);
+        }
+        
+        arr = skipList.search("elem69");
+        assertNull(arr[0]);
+
+    }
+
+
+    public void testRemoveByKey() {
+        assertNull(skipList.removeByKey("elem"));
+        Rectangle rect1 = new Rectangle("elem1", new Coordinates(0, 0, 1024,
+            1024));
+        Rectangle rect2 = new Rectangle("elem2", new Coordinates(0, 0, 1024,
+            1024));
+        Rectangle rect3 = new Rectangle("elem3", new Coordinates(0, 0, 1024,
+            1024));
+        Rectangle rect4 = new Rectangle("elem4", new Coordinates(0, 0, 1024,
+            1024));
+
+        assertTrue(skipList.insert(rect1));
+        assertTrue(skipList.insert(rect2));
+        assertTrue(skipList.insert(rect3));
+        assertTrue(skipList.insert(rect4));
+
+        assertEquals(skipList.removeByKey("elem1"), rect1);
+        assertEquals(skipList.removeByKey("elem2"), rect2);
+        assertEquals(skipList.removeByKey("elem3"), rect3);
+        assertEquals(skipList.removeByKey("elem4"), rect4);
+
+        assertNull(skipList.removeByKey("elem1"));
+        assertNull(skipList.removeByKey("elem2"));
+        assertNull(skipList.removeByKey("elem3"));
+        assertNull(skipList.removeByKey("elem4"));
+
+        assertEquals(skipList.removeByKey("not a real key"), null);
+
+    }
+
+
+    public void testRemoveByCoordinates() {
+        rect = new Rectangle("elem", new Coordinates(0, 0, 1024, 1024));
+        Coordinates copyCoords = new Coordinates(0, 0, 1024, 1024);
+        Coordinates nonCopyCoords = new Coordinates(0, 1, 1024, 1023);
+        assertNull(skipList.removeByCoordinates(copyCoords));
+
+        skipList.insert(rect);
+        assertEquals(1, skipList.size());
+        assertNull(skipList.removeByCoordinates(nonCopyCoords));
+        assertEquals(skipList.removeByCoordinates(copyCoords), new Rectangle("elem", copyCoords));
+        assertEquals(0, skipList.size());
+
+    }
+
+
+    public void testSize() {
+
+        assertEquals(skipList.size(), 0);
+
+        for (int i = 0; i < 20; i++) {
+            assertTrue(skipList.insert(new Rectangle("elem", new Coordinates(0,
+                0, 1024, 1024))));
+        }
+
+        assertEquals(skipList.size(), 20);
+    }
+
+
+    public void testDump() {
+        skipList.insert(new Rectangle("elem", new Coordinates(0, 0, 1024,
+            1024)));
+        skipList.dump();
+    }
+
+
+    public void testIntersection() {
+
+        assertEquals("", skipList.intersection());
+
+        Rectangle p1 = new Rectangle("p1", new Coordinates(512 / 2, 512 / 2,
+            512, 512));
+        Rectangle p2 = new Rectangle("p2", new Coordinates(0, 0, 128, 128));
+
+        skipList.insert(p1);
+        assertEquals("", skipList.intersection());
+
+        skipList.insert(p2);
+        assertEquals("", skipList.intersection());
+
+        assertEquals(skipList.removeByKey("p1"), p1);
+        assertEquals(skipList.removeByKey("p2"), p2);
+
+        Rectangle p3 = new Rectangle("p3", new Coordinates(512 / 2, 512 / 2,
+            512, 512));
+        Rectangle p4 = new Rectangle("p4", new Coordinates(0, 0, 512, 512));
+
+        assertTrue(skipList.insert(p3));
+        assertTrue(skipList.insert(p4));
+
+        assertEquals(
+            "(p3, 256, 256, 512, 512 | p4, 0, 0, 512, 512)\n(p4, 0, 0, 512, 512 | p3, 256, 256, 512, 512)\n",
+            skipList.intersection());
+
+    }
+
+
+    public void testRegionSearch() {
+        Coordinates c = new Coordinates(512 / 2, 512 / 2, 512, 512);
+
+        // these intersect -----
+        Coordinates cBottomLeft = new Coordinates(0, 0, 512, 512);
+        Coordinates cBottomRight = new Coordinates(512, 0, 512, 512);
+        Coordinates cTopLeft = new Coordinates(0, 512, 512, 512);
+        Coordinates cTopRight = new Coordinates(512, 512, 512, 512);
+
+        Coordinates cTop = new Coordinates(512 / 2, 512, 512, 512);
+        Coordinates cBottom = new Coordinates(512 / 2, 0, 512, 512);
+        Coordinates cLeft = new Coordinates(0, 512 / 2, 512, 512);
+        Coordinates cRight = new Coordinates(512, 512 / 2, 512, 512);
+
+        Coordinates cOverlap = new Coordinates(512 / 2, 512 / 2, 512, 512);
+
+        // these don't interesect; merely border ----
+        Coordinates cBorderX = new Coordinates(0, 512, 512 / 2, 1);
+        Coordinates cBorderY = new Coordinates(512, 0, 1, 512 / 2);
+        Coordinates cCorner = new Coordinates(0, 0, 512 / 2, 512 / 2);
+
+        skipList.insert(new Rectangle("1", cOverlap));
+
+        skipList.insert(new Rectangle("2", cBottomRight));
+        skipList.insert(new Rectangle("3", cTopLeft));
+        skipList.insert(new Rectangle("4", cTopRight));
+        skipList.insert(new Rectangle("5", cBottomLeft));
+
+        skipList.insert(new Rectangle("6", cTop));
+        skipList.insert(new Rectangle("7", cBottom));
+        skipList.insert(new Rectangle("8", cLeft));
+        skipList.insert(new Rectangle("9", cRight));
+
+        skipList.insert(new Rectangle("10", cBorderX));
+        skipList.insert(new Rectangle("11", cBorderY));
+        skipList.insert(new Rectangle("12", cCorner));
+
+        assertEquals(skipList.regionSearch(c), 
+            "(1, 256, 256, 512, 512)\n"
+            + "(2, 512, 0, 512, 512)\n" + "(3, 0, 512, 512, 512)\n"
+            + "(4, 512, 512, 512, 512)\n" + "(5, 0, 0, 512, 512)\n"
+            + "(6, 256, 512, 512, 512)\n" + "(7, 256, 0, 512, 512)\n"
+            + "(8, 0, 256, 512, 512)\n" + "(9, 512, 256, 512, 512)");
+
+    }
+
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestSkipList" project="P1" tests="8" started="8" failures="0" errors="0" ignored="0">
+  <testsuite name="TestSkipList" time="0.013">
+    <testcase name="testInsert" classname="TestSkipList" time="0.004"/>
+    <testcase name="testSearch" classname="TestSkipList" time="0.003"/>
+    <testcase name="testRemoveByKey" classname="TestSkipList" time="0.001"/>
+    <testcase name="testRemoveByCoordinates" classname="TestSkipList" time="0.001"/>
+    <testcase name="testSize" classname="TestSkipList" time="0.001"/>
+    <testcase name="testDump" classname="TestSkipList" time="0.001"/>
+    <testcase name="testIntersection" classname="TestSkipList" time="0.001"/>
+    <testcase name="testRegionSearch" classname="TestSkipList" time="0.001"/>
+  </testsuite>
+</testrun>

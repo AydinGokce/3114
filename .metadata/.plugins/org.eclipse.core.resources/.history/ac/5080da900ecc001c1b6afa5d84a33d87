@@ -1,0 +1,12 @@
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+
+public class MinHeap {
+	private PriorityQueue<Vertex> heap;
+	
+	MinHeap(int numVertices) {
+		heap = new PriorityQueue<Vertex>(numVertices, new VertexComparator<Vertex>());
+	}
+	
+	
+}
